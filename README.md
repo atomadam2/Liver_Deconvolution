@@ -20,10 +20,21 @@ After alignment, all data was uploaded into R using Seurat
 
 LiverDeconv_scCombine.R - Script with code for pulling in all scRNA-seq data and combining
 This script will create an R object containing all data. This RObj is needed for all other scripts.
-Note: This will contain all PBMC data we generated from these samples, including cell treted with LPS. Subsequent analyses will remove this data for simplicity.
+Note: This will contain all PBMC data we generated from these samples, including cells treted with LPS. Subsequent analyses will remove this data for simplicity.
+The output of this script is an RObj used for all other scripts and analyses and can be used for future analyses
 
 LiverDeconv_scFigures.R - Script with code for making all figures describing scRNA-seq data 
-All parts of Figure 1 from paper are generated in this script
+All parts of Figure 1 from paper are generated in this script (Except DE genes)
+Figure 2A Clustering is also made
+All Supplemental figures are made
+
+LiverDeconv_scDE - Script with code for performing Resident vs Peripheral Differnetial Expression testing in Seurat
+This produces a large nnumber of tables for differentially expressed genes in different cell types
+Healthy Liver vs Healthy PBMC
+Healthy PBMC vs AH PBMC
+AH PBMC vs Healthy Liver
+Does not include liver specific cells (Hep, Chol, LSEC, Plasma cells)
+These tables can be put into other pathway analysis software (Metascape for example)
 
 Part 2: Deconvolution of bulk RNA-seq data from chronic liver disease patients 
 
@@ -35,4 +46,37 @@ Removing LPS treated cells
 Creating single separate clusters for CD4 T-cells, CD8 T-cells, NK-cells
 Removing clusters with very small numbers of cells (as described in paper)
 Subsampling all clusters to just 200 cells/cluster.
+This output can be put into Cibersortx for a signature gene matrix (Which is Supplemental Table 2)
+
+LiverDeconv_CibersortBoxplots.R - Script with code for making boxplots of Cibersort data
+Simple script using ggplot to make clustered boxplots of cibersort data.
+Makes Figure 2B,C,D
+This script also requires the following files which contain all of the output from Cibersortx (basically all results)
+- Cibersort_CellTypes_Liver_numbers.csv
+- Cibersort_CellTypes_Liver.csv
+
+Part 3: Analysis of Liver RNA-seq data
+
+Pitt_AH_Liver_align.sh - This is a BASH script that very simply aligns the RNA-seq data to the human genome
+NOTES:
+- The raw RNA-seq data (fastq files) are available from dbgap
+- https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs001807.v1.p1
+- These data are protected and must be requested
+- Alignment was performed using kallisto to the human genome provided by kallisto
+- https://pachterlab.github.io/kallisto/manual
+- Alignemnt was performed on a HPC with slurm, using the sample numbers from dbgap to iterate through all files
+- bootstrap was set to 100
+
+LiverDeconv_BulkRNASleuth.R - Script with code for running Sleuth to analyze RNA-seq data and making figure
+Makes all figiures for Figure 3
+This script uses the following files:
+- Compiled_Names_v3.txt
+- Pitt_AH_TPM.txt
+
+Part 4: WGCNA
+
+LiverDeconv_WGCNA.R - Script with code to run WGCNA
+This script uses the following files:
+- Compiled_Names_v3.txt
+- Pitt_AH_TPM.txt
 
