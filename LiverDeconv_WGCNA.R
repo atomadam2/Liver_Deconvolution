@@ -31,7 +31,7 @@ getwd()
 ########################################
 
 # Load geen expression data
-Pitt_TPM <- read.delim("XXXX/Pitt_TPM.txt", row.names=1)
+Pitt_TPM <- read.delim("XXXX/Pitt_AH_TPM.txt", row.names=1)
 
 # Load clinical Data
 traitData <- read.csv("XXXX/Pitt_Clinical_all.csv")
