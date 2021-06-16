@@ -36,6 +36,8 @@ AH PBMC vs Healthy Liver
 Does not include liver specific cells (Hep, Chol, LSEC, Plasma cells)
 These tables can be put into other pathway analysis software (Metascape for example)
 
+Kim2021_CibersortSigGene_SuppTable2 - This is Supplementary Table 2 in the manuscript, but as a text file. The original publication was converted to excel and has gene->date errors (sorry about that and thanks Guo-Liang Chew for finding this!)
+
 Part 2: Deconvolution of bulk RNA-seq data from chronic liver disease patients 
 
 Reduce scRNA-seq data for deconvolution
